@@ -1,0 +1,31 @@
+Arguments: 
+  D:\ProgramData\nodejs\node.exe D:\ProgramData\nodejs\node_modules\yarn\bin\yarn.js add react react-dom
+
+PATH: 
+  C:\strawberry\perl\bin;C:\strawberry\c\bin;D:\VMware\bin\;D:\WINDOWS.X64_193000_db_home\bin;D:\Perl64\bin;C:\Users\Jealh\AppData\Roaming\ActiveState\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\System32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\jdks\jdk1.8\bin;D:\jdks\jdk1.8\jre\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\Git\cmd;D:\nodejs\;D:\MinGW\bin;D:\program files\MongoDb\bin;D:\Android\Sdk\platform-tools\;D:\flutter\bin;D:\nvm;D:\ProgramData\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;D:\program files\bin;C:\Program Files\dotnet\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Jealh\.cargo\bin;D:\anaconda3\Scripts;D:\anaconda3;C:\Users\Jealh\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;D:\Program Files (x86)\IntelliJ IDEA Community Edition 2020.1.2\bin;C:\Program Files\nodejs\node_global;D:\program files\IntelliJ IDEA 2021.1\bin;C:\Users\Jealh\AppData\Roaming\npm;D:\nodejs\node_global;D:\MySQL Server 8.0\bin;D:\Program Files (x86)\CLion 2021.1.1\bin;D:\program files\Huawei\DevEco Studio 2.1.0.501\bin;D:\JetBrains\WebStorm 2021.2\bin;C:\opt\GTK\bin;C:\Program Files (x86)\GitHub CLI\
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.13.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'D:\MyFrontEndFile\umijs\j-tools\packages\doc-site\node_modules\@swc\core-win32-x64-msvc\swc.win32-x64-msvc.node'
+
+npm manifest: 
+  {
+    "name": "jj-design",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
