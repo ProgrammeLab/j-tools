@@ -1,12 +1,13 @@
 import * as React from 'react'
+import InnerUpload from './uploader'
 
 export type UploadProps = {
-  url: string
+  url?: string
+  children?: React.ReactNode
 }
 
-
-export const Upload: React.FC<UploadProps> = () => {
-  return <div>
-    点击上传<input type="file" />
-  </div>
+export const Upload: React.FC<UploadProps> = ({ children }) => {
+  return <InnerUpload>
+    {children}
+  </InnerUpload>
 }

@@ -6,7 +6,7 @@ hero:
     - text: Hello
       link: /
     - text: World
-      link: /
+      link: /components/upload
 features:
   - title: Hello
     emoji: 💎
@@ -20,10 +20,3 @@ features:
 ---
 
 doc-site
-
-```tsx
-import {Upload} from 'jj-design';
-
-export default () => <Upload/>;
-
-```
