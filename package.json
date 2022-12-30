@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "docs":"yarn workspace doc-site run start"
+  },
   "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.47.1",
