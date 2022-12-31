@@ -48,7 +48,12 @@ const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) =>
   }
 
   return <div {...events}>
-    <input type="file" ref={inputRef} onChange={onChange} style={{ display: 'none' }} />
+    <input
+      type="file"
+      ref={inputRef}
+      key={uid} onChange={onChange}
+      style={{ display: 'none' }}
+    />
     {children}
   </div>
 }

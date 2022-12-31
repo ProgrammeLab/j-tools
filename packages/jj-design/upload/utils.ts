@@ -16,8 +16,16 @@ export const isFileAccept = (file: File, acceptedFiles: string | string[]) => {
 
   return acceptFileTypeArray.some((type) => {
     const typeString = type.trim();
-    return (
-      type === '*' || fileName.endsWith(typeString) || mimeType === typeString
-    );
+    return type === '*' || fileName.endsWith(typeString) || mimeType === typeString;
   });
+};
+
+/**
+ * 获取文件列表
+ */
+export const getNextFileList = (file: FileWithUid, fileList: FileWithUid[]) => {
+  const nextFileList = [...fileList];
+  const fileIndex = nextFileList.findIndex(({ uid }: FileWithUid) => uid === file.uid);
+  fileIndex === -1 ? nextFileList.push(file) : (nextFileList[fileIndex] = file);
+  return nextFileList;
 };
