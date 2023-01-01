@@ -1,4 +1,6 @@
-# 普通上传
+# Upload 上传
+
+## 普通上传
 
 ```tsx
 import { Upload } from 'jj-design';
@@ -6,7 +8,15 @@ import { Upload } from 'jj-design';
 export default () => <Upload>选择文件</Upload>;
 ```
 
-# drag 模式
+## 选择多文件
+
+```tsx
+import { Upload } from 'jj-design';
+
+export default () => <Upload multiple>选择多文件</Upload>;
+```
+
+## drag 模式
 
 ```tsx
 import { Upload } from 'jj-design';

@@ -4,7 +4,7 @@ export type InnerUploadProps = Partial<{
   action: string
   onChange?: () => void
   onBatchStart?: (param: FileWithUid[]) => void
-}>
+}> & React.HTMLProps<HTMLInputElement>
 
 export interface UploadProgressEvent extends ProgressEvent {
   percent?: number;

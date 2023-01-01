@@ -6,7 +6,7 @@ import { getUid, isFileAccept } from './utils'
 
 const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) => {
 
-  const { children, accept = '*', directory, action = '', onBatchStart } = props
+  const { children, accept = '*', directory, action = '', onBatchStart, ...restProps } = props
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const [uid, setUid] = React.useState(getUid())
@@ -65,6 +65,7 @@ const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) =>
       ref={inputRef}
       key={uid} onChange={onChange}
       style={{ display: 'none' }}
+      {...restProps}
     />
     {children}
   </div>

@@ -12,11 +12,15 @@ export type UploadProps = {
    * 支持: button / drag
    */
   type?: string
+  /**
+   * 是否支持选择多个文件
+   */
+  multiple?: boolean
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
 
-  const { children, type } = props
+  const { children, type, ...restProps } = props
   const [loadedFiles, setLoadedFiles] = React.useState<FileWithUid[]>()
 
   const renderLoadedFile = React.useMemo(() => {
@@ -29,7 +33,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
   const onBatchStart = (param: FileWithUid[]) => {
     let nextFileList = [...param]
     param.forEach((file) => {
-      nextFileList = getNextFileList(file, loadedFiles || [])
+      nextFileList = getNextFileList(file, nextFileList)
     })
     setLoadedFiles(nextFileList)
   }
@@ -37,7 +41,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
   if (type === 'drag') {
     return <>
       <div className='upload-drag'>
-        <InnerUpload onBatchStart={onBatchStart} action='http://127.0.0.1:3000/upload'>
+        <InnerUpload {...restProps} onBatchStart={onBatchStart} action='http://127.0.0.1:3000/upload'>
           {children}
         </InnerUpload>
       </div>
@@ -45,7 +49,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
     </>
   }
 
-  return <InnerUpload onBatchStart={onBatchStart} action='http://127.0.0.1:3000/upload'>
+  return <InnerUpload {...restProps} onBatchStart={onBatchStart} action='http://127.0.0.1:3000/upload'>
     {children}
     {renderLoadedFile}
   </InnerUpload>
