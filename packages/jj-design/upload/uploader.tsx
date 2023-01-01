@@ -19,8 +19,20 @@ const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) =>
     inputRef.current.click()
   }
 
+  const onFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+
+    e.preventDefault();
+
+    if (e.type === 'dragover')
+      return
+    console.log("event:", e.dataTransfer.files);
+    uploadFile([...e.dataTransfer.files])
+  }
+
   const events = {
-    onClick
+    onClick,
+    onDrop: onFileDrop,
+    onDragOver: onFileDrop
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
