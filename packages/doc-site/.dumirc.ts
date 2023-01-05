@@ -11,12 +11,15 @@ export default defineConfig({
           children: [
             {
               title: 'upload 上传',
-              link: '/components/upload'
-            }
-          ]
-
-        }
-      ]
-    }
+              link: '/components/upload',
+            },
+            {
+              title: 'WaterMark 水印',
+              link: '/components/water-mark',
+            },
+          ],
+        },
+      ],
+    },
   },
 });
