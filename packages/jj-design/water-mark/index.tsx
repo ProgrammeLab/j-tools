@@ -1,25 +1,37 @@
 import * as React from 'react'
+import { rotateCvs, calculateWidth, getCenterPoint } from './util'
 
 export interface WaterMarkProps {
   text: string
-  fontSize?: number
+  font?: Partial<{
+    fontSize: number
+    color: string
+    fontWeight: 'normal' | 'light' | 'weight' | number
+    fontFamily: string
+  }>
   width?: number
   height?: number
 }
 
 export const WaterMark: React.FC<React.PropsWithChildren<WaterMarkProps>> = (props) => {
-  const { children, text, fontSize = 14, width = 90, height = 90 } = props
+  const { children, text, font = {}, width = 90, height = 90 } = props
+
+  const { fontSize = 14, color = 'rgba(0,0,0,.6)' } = font
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   const renderWaterMask = React.useCallback(() => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.setAttribute('width', `${width}px`);
-    canvas.setAttribute('height', `${height}px`);
+    canvas.setAttribute('width', `${calculateWidth(text, fontSize)}px`);
+    canvas.setAttribute('height', `${calculateWidth(text, fontSize)}px`);
     if (ctx) {
-      ctx.rotate(45 * Math.PI / 180)
-      ctx.font = `${fontSize}px`
-      ctx.fillText(text, 15, 5, width);
+      const [X, Y] = getCenterPoint(text, fontSize);
+      rotateCvs(ctx, -45, calculateWidth(text, fontSize))
+      ctx.font = `${fontSize}px sans-serif`
+      ctx.textAlign = 'center'
+      ctx.fillStyle = color
+      ctx.textBaseline = 'middle'
+      ctx.fillText(text, X, Y, width);
       const url = canvas.toDataURL()
       renderCanvasBg(url)
     }

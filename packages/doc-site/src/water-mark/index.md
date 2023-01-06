@@ -6,7 +6,7 @@
 import { WaterMark } from 'jj-design';
 
 export default () => (
-  <WaterMark text="huhengdong">
+  <WaterMark text="water-mark">
     The light-speed iteration of the digital world makes products more complex.
     However, human consciousness and attention resources are limited. Facing
     this design contradiction, the pursuit of natural interaction will be the
