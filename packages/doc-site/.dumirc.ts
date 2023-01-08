@@ -10,9 +10,14 @@ export default defineConfig({
           title: '用户输入',
           children: [
             {
-              title: 'upload 上传',
+              title: 'Upload 上传',
               link: '/components/upload',
             },
+          ],
+        },
+        {
+          title: '其他',
+          children: [
             {
               title: 'WaterMark 水印',
               link: '/components/water-mark',
