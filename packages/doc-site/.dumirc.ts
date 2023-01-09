@@ -7,6 +7,15 @@ export default defineConfig({
     sidebar: {
       '/components': [
         {
+          title: '数据展示',
+          children: [
+            {
+              title: 'VirtualList 虚拟列表',
+              link: '/components/virtual-list',
+            },
+          ],
+        },
+        {
           title: '用户输入',
           children: [
             {
