@@ -33,17 +33,21 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
   }
 
   const renderData = React.useMemo(() => {
-    return data.slice(start, end).map(item => {
+    return data.slice(start, end).map((item, index) => {
+      if (renderData) {
+        return renderData(item, start + index)
+      }
       return <div style={{ height: itemHeight }} key={item}>item:{item}</div>
     })
   }, [start, end])
 
-  return <div ref={scrollContainerRef} onScroll={handleScroll} className='virtual-list-container'>
+  return <div ref={scrollContainerRef} onScroll={handleScroll}
+    className='virtual-list-container'>
     <div className='virtual-list-view-window' style={{
       height
     }}>
       <div className='virtual-list-holder' style={{ height: itemHeight * data.length }}>
-        <div className='virtual-list-content' style={{ top: positionTop }}>
+        <div className='virtual-list-content' style={{ transform: `translateY(${positionTop}px)` }}>
           {renderData}
         </div>
       </div>
