@@ -16,6 +16,10 @@ export default defineConfig({
           ],
         },
         {
+          title: '数据展示',
+          children: [{ title: 'Tabs', link: '/components/tabs' }],
+        },
+        {
           title: '其他',
           children: [
             {

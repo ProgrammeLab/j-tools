@@ -1,0 +1,39 @@
+.tab-wrapper {
+  display: flex;
+}
+
+.tab-direction-top,
+.tab-direction-bottom {
+  flex-direction: column;
+}
+
+.tab-direction-bottom {
+  .tab-nav-wrapper {
+    order: 1;
+  }
+  .tab-panel-wrapper {
+    order: 0;
+  }
+}
+
+.tab-direction-left,
+.tab-direction-right {
+  flex-direction: row;
+}
+
+.tab-direction-right {
+  .tab-nav-wrapper {
+    order: 1;
+  }
+  .tab-panel-wrapper {
+    order: 0;
+  }
+}
+
+.tab_column {
+  flex-direction: column;
+}
+
+.tab_row {
+  flex-direction: row;
+}
