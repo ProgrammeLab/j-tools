@@ -17,6 +17,7 @@ export type TabsProps = {
   items: Array<TabItemType>;
   tabPosition?: 'top' | 'bottom' | 'left' | 'right';
   activeKey?: string;
+  onChange?: (key: string) => void;
 };
 
 export type TabNavProps = {

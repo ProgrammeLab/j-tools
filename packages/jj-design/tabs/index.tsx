@@ -9,7 +9,7 @@ import { TabPanel } from './TabPanel'
 const clsPrefix = 'tab'
 
 export const Tabs: React.FC<TabsProps> = (props) => {
-  const { items = [], tabPosition = 'top', activeKey } = props;
+  const { items = [], tabPosition = 'top', activeKey, onChange } = props;
 
   // ================== mergedActiveKey ============
   const [mergedActiveKey, setMergedActiveKey] = useMergeState(items?.[0]?.key, {
@@ -19,6 +19,9 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   // ================== Events =====================
   function onInternalTabClick(key: string, e: React.MouseEvent | React.KeyboardEvent) {
     setMergedActiveKey(key)
+    const isChange = key !== mergedActiveKey;
+    if (isChange)
+      onChange?.(key)
   }
 
   const tabNavProps = {
