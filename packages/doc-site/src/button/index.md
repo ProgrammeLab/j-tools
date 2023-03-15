@@ -13,6 +13,8 @@ export default () => {
       <Button btnType="primary">Primary</Button>
       &nbsp;
       <Button btnType="text">text btn</Button>
+      &nbsp;
+      <Button btnType="danger">danger btn</Button>
     </>
   );
 };
@@ -31,6 +33,20 @@ export default () => {
       <Button size="small">small</Button>
       &nbsp;
       <Button size="large">large</Button>
+    </>
+  );
+};
+```
+
+## round 圆角
+
+```tsx
+import { Button } from 'jj-design';
+
+export default () => {
+  return (
+    <>
+      <Button round>round button</Button>
     </>
   );
 };

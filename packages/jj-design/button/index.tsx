@@ -6,7 +6,7 @@ import './index.less'
 type BaseButtonProps = React.PropsWithChildren<ButtonProps>
 
 export const Button: React.FC<BaseButtonProps> = React.forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref) => {
-  const { onClick, children, loading, className, style, size = 'middle', btnType = 'default', block } = props;
+  const { onClick, children, loading, className, style, size = 'middle', btnType = 'default', block, round } = props;
 
   const internalClick = (e: React.MouseEvent) => {
     if (loading) {
@@ -19,7 +19,8 @@ export const Button: React.FC<BaseButtonProps> = React.forwardRef<HTMLButtonElem
   const classes = React.useMemo(() => {
     return classNames(className, `btn-type-${btnType}`, `btn-size-${size}`, "jj-btn", {
       "btn-loading": loading,
-      "btn-block": block
+      "btn-block": block,
+      "btn-round": round
     })
   }, [className])
 

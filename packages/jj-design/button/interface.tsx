@@ -5,5 +5,6 @@ export type ButtonProps = {
   onClick: (e: React.MouseEvent) => void,
   loading?: boolean,
   size?: 'middle' | 'small' | 'large'
-  block?: boolean
+  block?: boolean,
+  round?: boolean
 } & React.ButtonHTMLAttributes<any>
