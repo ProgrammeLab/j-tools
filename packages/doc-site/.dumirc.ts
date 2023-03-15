@@ -7,6 +7,15 @@ export default defineConfig({
     sidebar: {
       '/components': [
         {
+          title: '基础组件',
+          children: [
+            {
+              title: 'Button 按钮',
+              link: '/components/button',
+            },
+          ],
+        },
+        {
           title: '用户输入',
           children: [
             {
