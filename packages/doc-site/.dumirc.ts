@@ -35,6 +35,10 @@ export default defineConfig({
               title: 'WaterMark 水印',
               link: '/components/water-mark',
             },
+            {
+              title: 'Animated 动效',
+              link: '/components/animated',
+            },
           ],
         },
       ],
