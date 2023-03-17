@@ -1,12 +1,6 @@
 {
   "extends": ["../.eslintrc.json"],
   "rules": {
-    "react/jsx-max-props-per-line": [
-      1,
-      {
-        "maximum": 1
-      }
-    ],
     "no-unused-vars": "warn"
   }
 }

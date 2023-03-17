@@ -3,6 +3,10 @@ export type AnimatedProps = {
   enter?: boolean;
   appear?: boolean;
   /**
+   * 控制显隐
+   */
+  in: boolean;
+  /**
    * 进入动画的起始状态。在元素插入之前添加，在元素插入完成后的下一帧移除。
    */
   enterFrom?: string;
@@ -26,6 +30,14 @@ export type AnimatedProps = {
    * 离开动画的结束状态。在一个离开动画被触发后的下一帧被添加 leave-from
    */
   leaveTo?: string;
+  /**
+   * 在 leave to 后是否保留 dom
+   */
+  unMountOnExit?: boolean;
+  /**
+   * 动画持续时间
+   */
+  duration?: number;
 };
 
 export type TransitionContextType = {

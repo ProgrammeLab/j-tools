@@ -1,15 +1,15 @@
 {
   "name": "j-tools",
   "version": "1.0.0",
-  "main": "index.js",
   "private": true,
+  "license": "MIT",
+  "main": "index.js",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "docs": "yarn workspace doc-site run start"
   },
-  "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",

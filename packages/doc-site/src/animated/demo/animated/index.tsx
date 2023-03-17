@@ -11,11 +11,15 @@ export default () => {
       <div>
         <Button onClick={() => setShow((pre) => !pre)}>setShow</Button>
       </div>
-      {show && <Animated enterFrom='fade-enter-from'
+      {<Animated
+        in={show}
+        enterFrom='fade-enter-from'
         enterActive='fade-enter-active'
         enterTo='fade-enter-to'
-        leaveTo='fade-exit-active'
-        leaveActive='fade-exit-active'>
+        leaveActive='fade-leave-active'
+        leaveFrom='fade-leave-from'
+        leaveTo='fade-leave-to'
+      >
         <div>this is animated children</div>
       </Animated>}
 
