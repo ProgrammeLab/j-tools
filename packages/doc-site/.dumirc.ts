@@ -36,8 +36,8 @@ export default defineConfig({
               link: '/components/water-mark',
             },
             {
-              title: 'Animated 动效',
-              link: '/components/animated',
+              title: 'Transition 动效',
+              link: '/components/transition',
             },
           ],
         },

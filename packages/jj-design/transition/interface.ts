@@ -33,9 +33,14 @@ export type AnimatedProps = {
   leaveTo?: string;
   /**
    * 在 leave to 后是否保留 dom
-   * 默认 true
+   * 默认 false
    */
   unMountOnExit?: boolean;
+  /**
+   * 在 enter from 时是否渲染 dom
+   * 默认 false
+   */
+  unMountOnEnter?: boolean;
   /**
    * 动画持续时间
    */

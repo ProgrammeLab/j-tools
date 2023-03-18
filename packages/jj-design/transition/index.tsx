@@ -20,11 +20,11 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
   // 如果有 TransitionGroup
   // const parentGroup = React.useContext<TransitionContextType | null>(TransitionContext)
 
-  const { children, enterFrom = 't-enter-from', enterTo = 't-enter-to', enterActive = 't-enter-active', leaveTo = 't-leave-to', in: inProps, duration = 1000, leaveFrom = '', leaveActive = 't-leave-active', unMountOnExit = false } = props
+  const { children, enterFrom = 't-enter-from', enterTo = 't-enter-to', enterActive = 't-enter-active', leaveTo = 't-leave-to', in: inProps, duration = 1000, leaveFrom = '', leaveActive = 't-leave-active', unMountOnExit = false, unMountOnEnter = false } = props
 
   // const appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear
 
-  const [status, setStatus] = React.useState<TransitionStatus>(TransitionStatus.UNMOUNTED)
+  const [status, setStatus] = React.useState<TransitionStatus>(unMountOnEnter ? TransitionStatus.UNMOUNTED : TransitionStatus.ENTER_FROM)
   const mountRef = React.useRef<any>(null);
   const nodeRef = React.useRef<HTMLElement>(null)
   /**
@@ -98,6 +98,7 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
     if (!mountRef.current) {
       // 第一次渲染，不做任何状态改变，因为第一次仅仅是渲染
       mountRef.current = children
+      return
     }
     if (timerRef.current) {
       clearTimeout(timerRef.current);
