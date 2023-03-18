@@ -19,6 +19,7 @@ export default () => {
         leaveActive='fade-leave-active'
         leaveFrom='fade-leave-from'
         leaveTo='fade-leave-to'
+        unMountOnExit
       >
         <div>this is animated children</div>
       </Transition>}

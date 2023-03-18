@@ -16,23 +16,21 @@ enum TransitionStatus {
 /**
  * 类似 vue 的 Transition 组件
  */
-export const Animated: React.FC<AnimatedProps> = (props) => {
+export const Transition: React.FC<AnimatedProps> = (props) => {
   // 如果有 TransitionGroup
   // const parentGroup = React.useContext<TransitionContextType | null>(TransitionContext)
 
-  const { children, enterFrom = '', enterTo = '', enterActive = '', leaveTo = '', in: inProps, duration = 1000, leaveFrom = '', leaveActive = '' } = props
+  const { children, enterFrom = 't-enter-from', enterTo = 't-enter-to', enterActive = 't-enter-active', leaveTo = 't-leave-to', in: inProps, duration = 1000, leaveFrom = '', leaveActive = 't-leave-active', unMountOnExit = false } = props
 
   // const appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear
 
-  const [status, setStatus] = React.useState(() => {
-    // 初始状态为 true
-    if (inProps) {
-      return TransitionStatus.ENTER_FROM
-    }
-    return TransitionStatus.UNMOUNTED
-  })
-  const mountRef = React.useRef(false);
+  const [status, setStatus] = React.useState<TransitionStatus>(TransitionStatus.UNMOUNTED)
+  const mountRef = React.useRef<any>(null);
   const nodeRef = React.useRef<HTMLElement>(null)
+  /**
+   * any time, there only one timer running
+   */
+  const timerRef = React.useRef<NodeJS.Timeout | null>()
 
   function onTransitionEnd() {
     nodeRef.current?.classList.remove(enterActive, enterTo)
@@ -47,78 +45,71 @@ export const Animated: React.FC<AnimatedProps> = (props) => {
       className: enterFrom
     })
     return ele;
-  }, [children])
+  }, [])
 
-  // React.useLayoutEffect(() => {
-  //   const dom = React.isValidElement(nodeRef.current) ? findDOMNode(nodeRef.current) : nodeRef.current;
+  /**
+   * timerOut 模拟 transitionEnd 事件
+   * @param status 
+   */
+  const timeoutTransition = (status: TransitionStatus) => {
+    timerRef.current = setTimeout(() => {
+      setStatus(status);
+      timerRef.current = null;
+      (unMountOnExit && status === TransitionStatus.LEAVE_TO) && setStatus(TransitionStatus.UNMOUNTED)
+    }, duration)
+  }
 
-  //   dom?.classList.add(enterActive)
-  //   dom?.addEventListener('transitionend', onTransitionEnd)
-  //   // 不得不说 requestAnimationFrame 实现异步，太赞了👍
-  //   requestAnimationFrame(() => {
-  //     requestAnimationFrame(() => {
-  //       dom?.classList.remove(enterFrom);
-  //       dom?.classList.add(enterTo);
-  //     })
-  //   })
-
-  //   return () => {
-  //     dom?.classList.remove(enterActive)
-  //     // dom?.classList.add(leaveTo)
-  //   }
-  // }, [])
-
-  const setNextTransitionStatus = () => {
-
+  /**
+   * 下一帧回调
+   * @param cb
+   */
+  const nextFrame = (cb) => {
+    requestAnimationFrame(() => {
+      console.log("next:", nodeRef.current);
+      requestAnimationFrame(cb)
+    })
   }
 
   const startTransition = (nextStatus) => {
-    const dom = React.isValidElement(nodeRef.current) ? findDOMNode(nodeRef.current) : nodeRef.current;
-
+    // const dom = React.isValidElement(nodeRef.current) ? findDOMNode(nodeRef.current) : nodeRef.current;
     switch (nextStatus) {
       case TransitionStatus.ENTER_TO:
-        // current status is enter_active
-        dom?.classList.add(enterActive)
-        // dom?.addEventListener('transitionend', onTransitionEnd)
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            // dom?.classList.remove(enterFrom);
-            // dom?.classList.add(enterTo);
-            dom?.setAttribute('class', `${enterActive} ${enterTo}`)
-          })
+        // current status is [ enter_from -> enter_active -> enter_to ]
+        // console.log(dom, Component, children)
+        nodeRef.current?.setAttribute('class', `${enterActive} ${enterFrom}`)
+        nextFrame(() => {
+          nodeRef.current?.setAttribute('class', `${enterActive} ${enterTo}`)
         })
-        setTimeout(() => {
-          setStatus(TransitionStatus.ENTER_TO);
-        }, duration)
+        timeoutTransition(TransitionStatus.ENTER_TO)
         break;
       case TransitionStatus.LEAVE_TO:
-        dom?.classList.add(leaveActive)
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            dom?.setAttribute('class', `${leaveActive} ${leaveTo}`)
-            // dom?.classList.remove(leaveFrom);
-            // dom?.classList.add(leaveTo);
-          })
+        // current status is [ leave_from -> leave_active -> leave_to ]
+        nodeRef.current?.setAttribute('class', `${leaveActive} ${leaveFrom}`)
+        nextFrame(() => {
+          nodeRef.current?.setAttribute('class', `${leaveActive} ${leaveTo}`)
         })
-        setTimeout(() => {
-          setStatus(TransitionStatus.ENTER_TO);
-        }, duration)
+        timeoutTransition(TransitionStatus.LEAVE_TO)
         break;
     }
   }
 
 
-  React.useEffect(() => {
-    // if ()
-    // if (status === TransitionStatus.ENTER_ACTIVE || status === TransitionStatus.LEAVE_ACTIVE)
-    //   return;
-    // else 
+  React.useLayoutEffect(() => {
+    if (!mountRef.current) {
+      // 第一次渲染，不做任何状态改变，因为第一次仅仅是渲染
+      mountRef.current = children
+    }
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     if (inProps) {
       // enter-active
+      console.log("enter-active")
       setStatus(TransitionStatus.ENTER_ACTIVE)
       startTransition(TransitionStatus.ENTER_TO)
     } else {
       // leave-active
+      console.log("leave-active")
       setStatus(TransitionStatus.LEAVE_ACTIVE)
       startTransition(TransitionStatus.LEAVE_TO)
     }

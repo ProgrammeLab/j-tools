@@ -3,7 +3,8 @@ export type AnimatedProps = {
   enter?: boolean;
   appear?: boolean;
   /**
-   * 控制显隐
+   * true: 开始 transition
+   * false: 结束 transition
    */
   in: boolean;
   /**
@@ -32,6 +33,7 @@ export type AnimatedProps = {
   leaveTo?: string;
   /**
    * 在 leave to 后是否保留 dom
+   * 默认 true
    */
   unMountOnExit?: boolean;
   /**
