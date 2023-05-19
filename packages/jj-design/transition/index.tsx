@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { findDOMNode } from 'react-dom'
-import TransitionContext from './TransitionContext'
 import type { AnimatedProps, TransitionContextType } from './interface'
 
 enum TransitionStatus {
@@ -16,24 +14,20 @@ enum TransitionStatus {
 /**
  * 类似 vue 的 Transition 组件
  */
-export const Transition: React.FC<AnimatedProps> = (props) => {
-  // 如果有 TransitionGroup
-  // const parentGroup = React.useContext<TransitionContextType | null>(TransitionContext)
+export const Transition: React.FC<React.PropsWithRef<AnimatedProps>> = React.forwardRef((props, ref) => {
 
   const { children, enterFrom = 't-enter-from', enterTo = 't-enter-to', enterActive = 't-enter-active', leaveTo = 't-leave-to', in: inProps, duration = 1000, leaveFrom = '', leaveActive = 't-leave-active', unMountOnExit = false, unMountOnEnter = false } = props
 
-  // const appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear
-
   const [status, setStatus] = React.useState<TransitionStatus>(unMountOnEnter ? TransitionStatus.UNMOUNTED : TransitionStatus.ENTER_FROM)
   const mountRef = React.useRef<any>(null);
-  const nodeRef = React.useRef<HTMLElement>(null)
+  const nodeRef = React.useRef<HTMLElement | null>(null)
   /**
    * any time, there only one timer running
    */
   const timerRef = React.useRef<NodeJS.Timeout | null>()
 
   function onTransitionEnd() {
-    nodeRef.current?.classList.remove(enterActive, enterTo)
+    nodeRef?.current?.classList.remove(enterActive, enterTo)
   }
 
   /**
@@ -41,8 +35,17 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
    */
   const Component = React.useMemo(() => {
     const ele = React.cloneElement(children as React.ReactElement, {
-      ref: nodeRef,
-      className: enterFrom
+      ref: (instance) => {
+        nodeRef.current = instance;
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(nodeRef.current);
+          } else if (ref && typeof ref === 'object') {
+            ref.current = nodeRef.current;
+          }
+        }
+      },
+      className: enterFrom,
     })
     return ele;
   }, [])
@@ -65,17 +68,14 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
    */
   const nextFrame = (cb) => {
     requestAnimationFrame(() => {
-      console.log("next:", nodeRef.current);
       requestAnimationFrame(cb)
     })
   }
 
   const startTransition = (nextStatus) => {
-    // const dom = React.isValidElement(nodeRef.current) ? findDOMNode(nodeRef.current) : nodeRef.current;
     switch (nextStatus) {
       case TransitionStatus.ENTER_TO:
         // current status is [ enter_from -> enter_active -> enter_to ]
-        // console.log(dom, Component, children)
         nodeRef.current?.setAttribute('class', `${enterActive} ${enterFrom}`)
         nextFrame(() => {
           nodeRef.current?.setAttribute('class', `${enterActive} ${enterTo}`)
@@ -105,12 +105,10 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
     }
     if (inProps) {
       // enter-active
-      console.log("enter-active")
       setStatus(TransitionStatus.ENTER_ACTIVE)
       startTransition(TransitionStatus.ENTER_TO)
     } else {
       // leave-active
-      console.log("leave-active")
       setStatus(TransitionStatus.LEAVE_ACTIVE)
       startTransition(TransitionStatus.LEAVE_TO)
     }
@@ -119,8 +117,4 @@ export const Transition: React.FC<AnimatedProps> = (props) => {
   return <>
     {status === TransitionStatus.UNMOUNTED ? null : Component}
   </>
-}
-
-// Animated.defaultProps = {
-//   enter:
-// }
+})

@@ -45,7 +45,11 @@ export type AnimatedProps = {
    * 动画持续时间
    */
   duration?: number;
-};
+  /**
+   *
+   */
+  targetRef?: React.RefObject<any> | ((instance: any) => void);
+} & React.RefAttributes<unknown>;
 
 export type TransitionContextType = {
   isMounting: boolean;

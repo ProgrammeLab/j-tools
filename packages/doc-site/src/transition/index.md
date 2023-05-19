@@ -13,6 +13,10 @@
 
 <code src="./demo/animated/unMountOnExit.tsx" description="使用 unMountOnExit = true, 在 leave-to 阶段结束后不保留 dom">默认使用</code>
 
+## 稍复杂使用
+
+<code src="./demo/scroll/scroll.tsx" description="配合intersectionObserver动画, 在传入 ref 时，直接在 Transition 组件中传入 ref props， 不能在 Transition 的子组件中设置 ref, 因为 Transition 内部对子组件进行了 clone, 会丢失 ref">配合 intersectionObserver 动画</code>
+
 <!-- ```tsx
 import { Animated } from 'jj-design';
 

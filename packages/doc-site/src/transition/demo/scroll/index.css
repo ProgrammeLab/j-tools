@@ -1,0 +1,19 @@
+.comp-root {
+  height: 200px;
+  width: 100%;
+  overflow: scroll;
+}
+
+.fade-from {
+  top: -20px;
+  opacity: 0;
+}
+
+.fade-to {
+  top: 0;
+  opacity: 1;
+}
+
+.t-enter-active {
+  transition: all 0.5s;
+}
