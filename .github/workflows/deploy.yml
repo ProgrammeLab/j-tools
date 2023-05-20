@@ -15,7 +15,7 @@ jobs:
 
       - name: Install and Build
         run:
-          yarn add
+          npm install
           yarn run build:docs
 
       - name: Build and deploy
