@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
+    "build:docs": "yarn workspace doc-site run build",
     "docs": "yarn workspace doc-site run start"
   },
   "devDependencies": {
