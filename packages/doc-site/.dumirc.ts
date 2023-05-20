@@ -2,9 +2,10 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   outputPath: `../../docs`,
-  publicPath: `./`,
-  headScripts: ["var publicPath = '/j-tools/'"],
-  runtimePublicPath: {},
+  base: '/j-tools/',
+  publicPath: `/j-tools/`,
+  // headScripts: ["var publicPath = '/j-tools/'"],
+  // runtimePublicPath: {},
   themeConfig: {
     name: 'jj-design',
     nav: [],
