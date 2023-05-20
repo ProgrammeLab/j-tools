@@ -2,6 +2,8 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   outputPath: `../../docs`,
+  publicPath: './',
+  runtimePublicPath: {},
   themeConfig: {
     name: 'jj-design',
     nav: [],
