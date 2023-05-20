@@ -1,6 +1,6 @@
 ---
 hero:
-  title: Site
+  title: JJ-Design
   description: jealh's 组件文档站
   actions:
     - text: Hello

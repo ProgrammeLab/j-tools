@@ -4,8 +4,6 @@ export default defineConfig({
   outputPath: `../../docs`,
   base: '/j-tools/',
   publicPath: `/j-tools/`,
-  // headScripts: ["var publicPath = '/j-tools/'"],
-  // runtimePublicPath: {},
   themeConfig: {
     name: 'jj-design',
     nav: [],
