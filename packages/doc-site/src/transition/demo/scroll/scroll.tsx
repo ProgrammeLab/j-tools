@@ -7,7 +7,8 @@ export default () => {
   const [nums] = React.useState(new Array(10).fill(0));
   return <div className='comp-root'>
     {nums.map((_, index) => {
-      return <ScrollItem key={index} />;
+      return <ScrollItem id={index}
+        key={index} />;
     })}
   </div>;
 };
