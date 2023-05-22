@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import webpackConfig from '../../config/webpack/component';
-import { UMD_DIR_NAME } from '../../constant';
+import { CWD, ESM_DIR_NAME, UMD_DIR_NAME } from '../../constant';
+import compileTs from '../utils/compileTs';
 import webpackWithPromise from '../utils/webpackWithPromise';
 
 /**
@@ -18,10 +19,17 @@ const buildUMD = () => {
   );
 };
 
+const buildES = () => {
+  return compileTs({
+    outDir: `${CWD}/${ESM_DIR_NAME}`,
+    buildModuleType: 'es',
+  });
+};
+
 export default {
   build: async () => {
     try {
-      await Promise.all([buildUMD()]);
+      await Promise.all([buildUMD(), buildES()]);
     } catch (error) {
       console.error(
         `[jj-scripts] Error Failed to build`,
@@ -29,5 +37,6 @@ export default {
       );
     }
   },
+  buildES,
   buildUMD,
 };
