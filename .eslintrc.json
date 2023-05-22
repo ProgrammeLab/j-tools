@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -19,7 +20,6 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
-    "semi": ["warn"],
     "react/jsx-max-props-per-line": [
       1,
       {

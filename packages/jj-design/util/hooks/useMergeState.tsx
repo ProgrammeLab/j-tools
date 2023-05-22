@@ -15,7 +15,7 @@ export default function useMergeState<T extends R, R = T>(
     postState?: (value: T) => T;
   },
 ): [R, Updater<T>] {
-  const { defaultValue, value, onChange, postState } = option || {};
+  const { defaultValue, value, postState } = option || {};
 
   const [innerValue, setInnerValue] = useState<T>(() => {
     if (value !== undefined) {
@@ -30,7 +30,7 @@ export default function useMergeState<T extends R, R = T>(
   const mergedState = value !== undefined ? value : innerValue;
   const postMergedValue = postState ? postState(mergedState) : mergedState;
 
-  const triggerUpdate: Updater<T> = usePersistCb((updater, ignoreDestroy) => {
+  const triggerUpdate: Updater<T> = usePersistCb((updater) => {
     setInnerValue(updater)
   })
 

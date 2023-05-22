@@ -4,7 +4,7 @@ import { TabInsCache, TabNavProps } from './interface';
 import './styles/tabnav.less'
 
 
-export const TabNav: React.FC<TabNavProps> = (props) => {
+const TabNav: React.FC<TabNavProps> = (props) => {
 
   const { tabs = [] } = React.useContext(TabContext);
   const { tabPosition = 'top', onTabClick, activeKey } = props
@@ -17,7 +17,7 @@ export const TabNav: React.FC<TabNavProps> = (props) => {
 
   React.useEffect(() => {
     // HTMLCollection
-    const children = [...navRef.current!.children];
+    const children = Array.from(navRef.current.children);
     let insMap = new Map();
     let first;
     children.forEach((child, index) => {
@@ -71,3 +71,6 @@ export const TabNav: React.FC<TabNavProps> = (props) => {
   </div>
 
 }
+
+export { TabNavProps }
+export default TabNav

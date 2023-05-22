@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FileWithUid, InnerUploadProps } from './interface'
+import { InnerUploadProps } from './interface'
 import { uploadFile as post } from './request'
 import { getUid, isFileAccept } from './utils'
 
@@ -26,7 +26,7 @@ const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) =>
     if (e.type === 'dragover')
       return
     console.log("event:", e.dataTransfer.files);
-    uploadFile([...e.dataTransfer.files])
+    uploadFile(Array.from(e.dataTransfer.files))
   }
 
   const events = {
@@ -37,7 +37,7 @@ const Uploader: React.FC<React.PropsWithChildren<InnerUploadProps>> = (props) =>
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
-    const acceptedFiles = [...(files ?? [])].filter(
+    const acceptedFiles = Array.from(files ?? []).filter(
       (file: File) => !directory || isFileAccept(file, accept),
     );
 

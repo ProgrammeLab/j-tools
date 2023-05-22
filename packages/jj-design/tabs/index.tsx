@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { TabNav } from './TabNav'
+import TabNav from './TabNav'
 import TabContext from './context'
 import useMergeState from '../util/hooks/useMergeState'
 import './styles/index.less'
 import { TabsProps } from './interface'
-import { TabPanel } from './TabPanel'
+import TabPanel from './TabPanel'
 
 const clsPrefix = 'tab'
 
-export const Tabs: React.FC<TabsProps> = (props) => {
+const Tabs: React.FC<TabsProps> = (props) => {
   const { items = [], tabPosition = 'top', activeKey, onChange } = props;
 
   // ================== mergedActiveKey ============
@@ -21,7 +21,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     setMergedActiveKey(key)
     const isChange = key !== mergedActiveKey;
     if (isChange)
-      onChange?.(key)
+      onChange?.(key, e)
   }
 
   const tabNavProps = {
@@ -41,3 +41,6 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     </div>
   </TabContext.Provider >
 }
+
+export { TabsProps }
+export default Tabs;

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { AnimatedProps, TransitionContextType } from './interface'
+import type { AnimatedProps } from './interface'
 
 enum TransitionStatus {
   UNMOUNTED = 'unmounted',
@@ -14,7 +14,7 @@ enum TransitionStatus {
 /**
  * 类似 vue 的 Transition 组件
  */
-export const Transition: React.FC<React.PropsWithRef<AnimatedProps>> = React.forwardRef((props, ref) => {
+const Transition: React.FC<React.PropsWithRef<AnimatedProps>> = React.forwardRef((props, ref) => {
 
   const { children, enterFrom = 't-enter-from', enterTo = 't-enter-to', enterActive = 't-enter-active', leaveTo = 't-leave-to', in: inProps, duration = 1000, leaveFrom = '', leaveActive = 't-leave-active', unMountOnExit = false, unMountOnEnter = false } = props
 
@@ -26,9 +26,9 @@ export const Transition: React.FC<React.PropsWithRef<AnimatedProps>> = React.for
    */
   const timerRef = React.useRef<NodeJS.Timeout | null>()
 
-  function onTransitionEnd() {
-    nodeRef?.current?.classList.remove(enterActive, enterTo)
-  }
+  // function onTransitionEnd() {
+  //   nodeRef?.current?.classList.remove(enterActive, enterTo)
+  // }
 
   /**
    * 渲染的真实children
@@ -118,3 +118,5 @@ export const Transition: React.FC<React.PropsWithRef<AnimatedProps>> = React.for
     {status === TransitionStatus.UNMOUNTED ? null : Component}
   </>
 })
+
+export default Transition;

@@ -5,7 +5,7 @@ import './index.less'
 
 type BaseButtonProps = React.PropsWithChildren<ButtonProps>
 
-export const Button: React.FC<BaseButtonProps> = React.forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref) => {
+const Button: React.FC<BaseButtonProps> = React.forwardRef<HTMLButtonElement, BaseButtonProps>((props, ref) => {
   const { onClick, children, loading, className, style, size = 'middle', btnType = 'default', block, round } = props;
 
   const internalClick = (e: React.MouseEvent) => {
@@ -30,3 +30,5 @@ export const Button: React.FC<BaseButtonProps> = React.forwardRef<HTMLButtonElem
     </button>
   </>
 })
+
+export default Button;

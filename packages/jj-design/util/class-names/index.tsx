@@ -1,7 +1,7 @@
 import { isObject, isString } from "../type-judge";
 
 export const classNames = function (...argus) {
-  const params = [...arguments];
+  const params = [...argus];
   const classes: Array<string> = [];
   for (let i = 0; i < params.length; i++) {
     if (!Boolean(params[i])) {

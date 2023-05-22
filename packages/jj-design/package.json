@@ -1,6 +1,10 @@
 {
   "name": "jj-design",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "build": "jj-scripts build:component"
+  },
+  "devDependencies": {}
 }

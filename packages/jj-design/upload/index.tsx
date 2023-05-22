@@ -18,7 +18,7 @@ export type UploadProps = {
   multiple?: boolean
 }
 
-export const Upload: React.FC<UploadProps> = (props) => {
+const Upload: React.FC<UploadProps> = (props) => {
 
   const { children, type, ...restProps } = props
   const [loadedFiles, setLoadedFiles] = React.useState<FileWithUid[]>()
@@ -54,3 +54,5 @@ export const Upload: React.FC<UploadProps> = (props) => {
     {renderLoadedFile}
   </InnerUpload>
 }
+
+export default Upload;

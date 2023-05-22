@@ -3,7 +3,7 @@ import TabContext from './context'
 import { TabPanelProps } from './interface';
 import './styles/tabpanel.less'
 
-export const TabPanel: React.FC<TabPanelProps> = (props) => {
+const TabPanel: React.FC<TabPanelProps> = (props) => {
   const { activeKey } = props
   const { tabs = [] } = React.useContext(TabContext)
 
@@ -19,3 +19,6 @@ export const TabPanel: React.FC<TabPanelProps> = (props) => {
     {Panels}
   </div>
 }
+
+export { TabPanelProps }
+export default TabPanel

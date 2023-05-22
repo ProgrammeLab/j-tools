@@ -13,8 +13,8 @@ export interface WaterMarkProps {
   height?: number
 }
 
-export const WaterMark: React.FC<React.PropsWithChildren<WaterMarkProps>> = (props) => {
-  const { children, text, font = {}, width = 90, height = 90 } = props
+const WaterMark: React.FC<React.PropsWithChildren<WaterMarkProps>> = (props) => {
+  const { children, text, font = {}, width = 90 } = props
 
   const { fontSize = 14, color = 'rgba(0,0,0,.6)' } = font
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -52,3 +52,5 @@ export const WaterMark: React.FC<React.PropsWithChildren<WaterMarkProps>> = (pro
     {children}
   </div>
 }
+
+export default WaterMark;

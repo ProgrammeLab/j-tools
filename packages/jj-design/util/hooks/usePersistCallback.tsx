@@ -1,4 +1,4 @@
-import { useCallback, useRef, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 
 export default function usePersistCb<T extends Function>(callBack: T) {
   const cbRef = useRef<T>();
