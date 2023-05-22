@@ -1,7 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "outDir": "es",
     "lib": ["es5", "dom"],
     "jsx": "react"
-  }
+  },
+  "exclude": ["es"]
 }

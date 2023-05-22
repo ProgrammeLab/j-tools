@@ -32,7 +32,7 @@ function getUse(cssModule) {
 const config = {
   mode: 'production',
   entry: {
-    jj: `${CWD}/index.ts`,
+    'jj-design': `${CWD}/index.ts`,
   },
   output: {
     path: `${CWD}/${UMD_DIR_NAME}`,
