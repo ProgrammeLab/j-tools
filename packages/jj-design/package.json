@@ -1,10 +1,33 @@
 {
   "name": "jj-design",
   "version": "1.0.0",
+  "description": "Jealh's React UI Library",
+  "keywords": [
+    "jj-design",
+    "react-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProgrammeLab/j-tools.git"
+  },
   "license": "MIT",
-  "main": "index.js",
+  "author": "jealh",
+  "main": "./lib/index.js",
+  "unpkg": "./dist/jj-design.min.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
   "scripts": {
     "build": "jj-scripts build:component"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">= 17"
+  },
+  "_unpkg": true
 }

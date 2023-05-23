@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import webpackConfig from '../../config/webpack/component';
-import { CWD, ESM_DIR_NAME, UMD_DIR_NAME } from '../../constant';
+import { CJS_DIR_NAME, CWD, ESM_DIR_NAME, UMD_DIR_NAME } from '../../constant';
 import compileTs from '../utils/compileTs';
 import webpackWithPromise from '../utils/webpackWithPromise';
 
@@ -26,10 +26,17 @@ const buildES = () => {
   });
 };
 
+const buildCJS = () => {
+  return compileTs({
+    outDir: `${CWD}/${CJS_DIR_NAME}`,
+    buildModuleType: 'cjs',
+  });
+};
+
 export default {
   build: async () => {
     try {
-      await Promise.all([buildUMD(), buildES()]);
+      await Promise.all([buildUMD(), buildES(), buildCJS()]);
     } catch (error) {
       console.error(
         `[jj-scripts] Error Failed to build`,
@@ -39,4 +46,5 @@ export default {
   },
   buildES,
   buildUMD,
+  buildCJS,
 };
