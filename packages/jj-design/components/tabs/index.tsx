@@ -1,7 +1,7 @@
 import * as React from 'react'
 import TabNav from './TabNav'
 import TabContext from './context'
-import useMergeState from '../util/hooks/useMergeState'
+import useMergeState from '../../util/hooks/useMergeState'
 import './styles/index.less'
 import { TabsProps } from './interface'
 import TabPanel from './TabPanel'

@@ -2,6 +2,7 @@
 
 import program from 'commander';
 import buildUtil from './scripts/build/index';
+import compileStyles from './scripts/utils/compileStyles';
 
 const { version } = require('../package.json');
 const commandList = ['build:component'];
@@ -23,6 +24,13 @@ program
   .description('build all these sources: es, cjs, dist and css')
   .action(() => {
     buildUtil.build();
+  });
+
+program
+  .command('build:style')
+  .description('compile less file and output css file')
+  .action(() => {
+    compileStyles.compileStyle();
   });
 
 program.parse(process.argv);
