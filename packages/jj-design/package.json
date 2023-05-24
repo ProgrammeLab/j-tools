@@ -22,7 +22,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "jj-scripts build:component",
+    "build": "jj-scripts build:component && jj-scripts build:style",
+    "build:component": "jj-scripts build:component",
     "build:style": "jj-scripts build:style"
   },
   "devDependencies": {},

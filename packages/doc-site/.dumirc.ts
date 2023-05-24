@@ -53,9 +53,7 @@ export default defineConfig({
       {
         libraryName: 'jj-design',
         libraryDirectory: 'es',
-        style: (name: string, file: Object) => {
-          return `${name}/styles`;
-        },
+        style: 'css',
       },
     ],
   ],

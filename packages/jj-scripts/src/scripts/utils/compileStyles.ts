@@ -7,6 +7,7 @@ import renameFile from 'gulp-rename';
 import mergeStream from 'merge-stream';
 import path from 'path';
 import styleConfig from '../../config/style.config';
+import handleStyleJSEntry from './styleJsEntry';
 
 const { cssConfig } = styleConfig;
 
@@ -95,8 +96,6 @@ function distLessFiles() {
       const relativePath = path.relative(distCssPath, esCssEntry);
       const text = `@import "${relativePath}";`;
 
-      console.log(chalk.blueBright('debug'), esCssEntry, '***', relativePath);
-
       if (esCssEntry.startsWith(`${cssConfig.output.es}/style`)) {
         content.unshift(text);
       } else {
@@ -135,8 +134,8 @@ export default {
   compileStyle: () => {
     return new Promise((resolve) => {
       gulp.series(
-        gulp.parallel(copyFiles), // ok
-        gulp.parallel(compileLessFileToBundle),
+        gulp.parallel(copyFiles),
+        gulp.parallel(compileLessFileToBundle, handleStyleJSEntry),
         gulp.parallel(distLessFiles, distCss),
         gulp.parallel(() => resolve(null))
       )(null);

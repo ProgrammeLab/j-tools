@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 export type ButtonProps = {
-  btnType?: 'primary' | 'ghost' | 'link' | 'text' | 'default',
-  onClick: (e: React.MouseEvent) => void,
+  btnType?: 'primary' | 'ghost' | 'link' | 'text' | 'danger' | 'default',
+  onClick?: (e: React.MouseEvent) => void,
   loading?: boolean,
   size?: 'middle' | 'small' | 'large'
   block?: boolean,

@@ -25,6 +25,10 @@ const styleConfig = {
     compiler: lessCompiler,
     lessOptions: {},
   },
+  jsEntry: {
+    entry: [`${COMPONENT_LIBRARY_DIR}/*/style/index.ts`],
+    styleSheetExtension: 'less',
+  },
 };
 
 export default styleConfig;

@@ -2,66 +2,16 @@
 
 ## 基本使用
 
-```tsx
-import { Button } from 'jj-design';
-
-export default () => {
-  return (
-    <>
-      <Button>Default</Button>
-      &nbsp;
-      <Button btnType="primary">Primary</Button>
-      &nbsp;
-      <Button btnType="text">text btn</Button>
-      &nbsp;
-      <Button btnType="danger">danger btn</Button>
-    </>
-  );
-};
-```
+<code src="./demo/basic.tsx">基本使用</code>
 
 ## size
 
-```tsx
-import { Button } from 'jj-design';
-
-export default () => {
-  return (
-    <>
-      <Button>default middle</Button>
-      &nbsp;
-      <Button size="small">small</Button>
-      &nbsp;
-      <Button size="large">large</Button>
-    </>
-  );
-};
-```
+<code src="./demo/size.tsx">基本使用</code>
 
 ## round 圆角
 
-```tsx
-import { Button } from 'jj-design';
-
-export default () => {
-  return (
-    <>
-      <Button round>round button</Button>
-    </>
-  );
-};
-```
+<code src="./demo/round.tsx">基本使用</code>
 
 ## block 全宽
 
-```tsx
-import { Button } from 'jj-design';
-
-export default () => {
-  return (
-    <>
-      <Button block>block button</Button>
-    </>
-  );
-};
-```
+<code src="./demo/full-width.tsx">基本使用</code>
