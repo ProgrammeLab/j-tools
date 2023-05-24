@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TabContext from './context'
 import { TabPanelProps } from './interface';
-import './styles/tabpanel.less'
 
 const TabPanel: React.FC<TabPanelProps> = (props) => {
   const { activeKey } = props

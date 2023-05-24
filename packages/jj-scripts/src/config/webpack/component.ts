@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 
-import { CWD, UMD_DIR_NAME } from '../../constant';
+import { COMPONENT_LIBRARY_DIR, CWD, UMD_DIR_NAME } from '../../constant';
 import babelConfig from '../babel.config';
 
 const lessRegExp = /\.less$/;
@@ -32,7 +32,7 @@ function getUse(cssModule) {
 const config = {
   mode: 'production',
   entry: {
-    'jj-design': `${CWD}/index.ts`,
+    'jj-design': `${CWD}/${COMPONENT_LIBRARY_DIR}/index.ts`,
   },
   output: {
     path: `${CWD}/${UMD_DIR_NAME}`,

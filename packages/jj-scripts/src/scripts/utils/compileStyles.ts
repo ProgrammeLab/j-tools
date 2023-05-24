@@ -20,20 +20,16 @@ function copyFiles() {
   const rawStyleEntries = [];
 
   cssConfig.entry.forEach((filePattern) => {
-    glob
-      .sync(filePattern, {
-        ignore: '!dist/**/*.(less|css)',
-      })
-      .forEach((relativePath) => {
-        rawStyleEntries.push(path.resolve(relativePath));
-      });
+    glob.sync(filePattern).forEach((relativePath) => {
+      rawStyleEntries.push(path.resolve(relativePath));
+    });
   });
 
   return new Promise((resolve, reject) => {
     let stream = mergeStream(
-      watchPatternArray.map((pattern) => {
-        gulp.src(pattern, { allowEmpty: true });
-      })
+      watchPatternArray.map((pattern) =>
+        gulp.src(pattern, { allowEmpty: true })
+      )
     );
 
     destDirs.forEach((destDir) => {
@@ -50,6 +46,10 @@ function copyFiles() {
   });
 }
 
+/**
+ * 编译 less 文件并输出到 es、lib目录
+ * @returns
+ */
 function compileLessFileToBundle() {
   const bundleDirs = [cssConfig.output.cjs, cssConfig.output.es].filter(
     (path) => fs.existsSync(path)
@@ -73,24 +73,29 @@ function compileLessFileToBundle() {
   });
 }
 
+/**
+ * 在 dist 目录下添加 index.less, 其中包含所以 es 下的导入
+ */
 function distLessFiles() {
   const { path: distCssPath, rawFileName } = cssConfig.output.dist;
   let entries = [];
 
   cssConfig.entry.forEach((entry) => {
     entries = entries.concat(glob.sync(entry));
-    console.log(chalk.blueBright('debug'), glob.sync(entry));
+    console.log(chalk.blueBright('debug'), glob.sync(entry), entry);
   });
 
   if (entries.length) {
     const content = [];
 
     entries.forEach((entry) => {
-      const esCssEntry = cssConfig.output.es + entry;
+      // slice to delete [COMPONENT_LIBRARY_DIR](components) dir prefix
+      const esCssEntry = cssConfig.output.es + entry.slice(entry.indexOf('\\'));
 
       const relativePath = path.relative(distCssPath, esCssEntry);
       const text = `@import "${relativePath}";`;
-      console.log(chalk.blueBright('debug'), esCssEntry, relativePath);
+
+      console.log(chalk.blueBright('debug'), esCssEntry, '***', relativePath);
 
       if (esCssEntry.startsWith(`${cssConfig.output.es}/style`)) {
         content.unshift(text);
@@ -112,6 +117,7 @@ function distCss() {
 
   return stream
     .pipe(renameFile(cssFileName))
+    .pipe(minifyCss())
     .pipe(gulp.dest(cssDistPath))
     .on('error', (error) => {
       console.log(
@@ -129,6 +135,7 @@ export default {
   compileStyle: () => {
     return new Promise((resolve) => {
       gulp.series(
+        gulp.parallel(copyFiles), // ok
         gulp.parallel(compileLessFileToBundle),
         gulp.parallel(distLessFiles, distCss),
         gulp.parallel(() => resolve(null))

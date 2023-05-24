@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ButtonProps } from './interface'
-import { classNames } from '../../util/class-names';
-import './styles/index.less'
+import { classNames } from '../util/class-names';
 
 type BaseButtonProps = React.PropsWithChildren<ButtonProps>
 

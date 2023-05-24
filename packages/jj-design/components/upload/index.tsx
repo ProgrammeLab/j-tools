@@ -2,7 +2,6 @@ import * as React from 'react'
 import InnerUpload from './uploader'
 import { FileWithUid } from './interface'
 import { getNextFileList } from './utils'
-import './styles/index.less'
 
 export type UploadProps = {
   url?: string

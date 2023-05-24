@@ -47,4 +47,16 @@ export default defineConfig({
       ],
     },
   },
+  extraBabelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'jj-design',
+        libraryDirectory: 'es',
+        style: (name: string, file: Object) => {
+          return `${name}/styles`;
+        },
+      },
+    ],
+  ],
 });

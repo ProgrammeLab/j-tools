@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TabContext from './context'
 import { TabInsCache, TabNavProps } from './interface';
-import './styles/tabnav.less'
 
 
 const TabNav: React.FC<TabNavProps> = (props) => {
